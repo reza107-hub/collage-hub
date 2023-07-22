@@ -26,7 +26,7 @@ const CollegeCard = ({ college }) => {
               />
             </div>
           </div>
-          <div className="space-y-7">
+          <div className="space-y-3">
             <div>
               <span className="border border-solid border-main text-gray-500 px-2 py-1 rounded-full text-sm">
                 {college?.admissionDates}
@@ -39,11 +39,12 @@ const CollegeCard = ({ college }) => {
             <h6 className="text-lg text-gray-600">
               Research history: {college?.researchHistory}
             </h6>
+            <h6 className="text-lg text-gray-600">Sports: {college?.sports}</h6>
           </div>
         </div>
       </div>
       <div className="p-4">
-        <Link to={""}>
+        <Link to={`/college-details/${college?._id}`}>
           <button className="btn bg-main text-white normal-case font-semibold hover:btn-outline hover:text-gray-500 hover:border-white">
             Details
           </button>

@@ -12,7 +12,7 @@ const FeaturedCollege = () => {
   };
 
   useEffect(() => {
-    fetch("colleges.json")
+    fetch("https://college-hub-server.vercel.app/colleges")
       .then((res) => res.json())
       .then((data) => setColleges(data));
   }, []);
@@ -63,7 +63,7 @@ const FeaturedCollege = () => {
         {" "}
         {/* Assign the ref to the college card section */}
         {filteredColleges.map((college) => (
-          <CollegeCard key={college.id} college={college} />
+          <CollegeCard key={college._id} college={college} />
         ))}
       </div>
     </div>
