@@ -1,0 +1,29 @@
+[
+  {
+    "id": 1,
+    "collegeImage": "https://i.postimg.cc/QNWRPyDw/photo-1607237138185-eedd9c632b0b-crop-faces-edges-cs-tinysrgb-fit-crop-fm-jpg-ixid-M3wx-Mj-A3f-DB8-MXxhb.jpg",
+    "collegeName": "ABC University",
+    "admissionDates": "August 1 - August 15, 2023",
+    "events": "Orientation Day, Career Fair, Alumni Meet",
+    "researchHistory": "Pioneering research in Artificial Intelligence",
+    "sports": "Basketball, Soccer, Tennis"
+  },
+  {
+    "id": 2,
+    "collegeImage": "https://i.postimg.cc/kGvrH2Sw/photo-1622604647545-0cada2f34470-crop-faces-edges-cs-tinysrgb-fit-crop-fm-jpg-ixid-M3wx-Mj-A3f-DB8-MXxhb.jpg",
+    "collegeName": "XYZ College",
+    "admissionDates": "September 1 - September 30, 2023",
+    "events": "Annual Fest, Hackathon, Science Exhibition",
+    "researchHistory": "Cutting-edge research in Biotechnology",
+    "sports": "Cricket, Volleyball, Swimming"
+  },
+  {
+    "id": 3,
+    "collegeImage": "https://i.postimg.cc/q71LMyfW/photo-1622397333309-3056849bc70b-crop-faces-edges-cs-tinysrgb-fit-crop-fm-jpg-ixid-M3wx-Mj-A3f-DB8-MXxhb.jpg",
+    "collegeName": "PQR Institute",
+    "admissionDates": "July 15 - July 31, 2023",
+    "events": "Cultural Night, Debate Competition, Workshop on Entrepreneurship",
+    "researchHistory": "Leading research in Environmental Science",
+    "sports": "Badminton, Football, Athletics"
+  }
+]

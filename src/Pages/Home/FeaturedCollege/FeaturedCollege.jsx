@@ -1,14 +1,46 @@
+import { useEffect, useState, useRef } from "react";
+import CollegeCard from "../../../Components/CollegeCard";
+
 const FeaturedCollege = () => {
+  const [colleges, setColleges] = useState([]);
+  const [searchQuery, setSearchQuery] = useState("");
+  const collegeCardRef = useRef(null); // Create a ref for the college card section
+
+  const handleSearch = () => {
+    // Scroll to the college card section when the search button is clicked
+    collegeCardRef.current.scrollIntoView({ behavior: "smooth" });
+  };
+
+  useEffect(() => {
+    fetch("colleges.json")
+      .then((res) => res.json())
+      .then((data) => setColleges(data));
+  }, []);
+
+  const handleSearchInputChange = (event) => {
+    setSearchQuery(event.target.value);
+  };
+
+  const filteredColleges = colleges.filter((college) =>
+    college.collegeName.toLowerCase().includes(searchQuery.toLowerCase())
+  );
+
   return (
-    <div>
-      <div className="form-control">
-        <div className="input-group">
+    <div className="mt-32 container mx-auto">
+      {/* search field */}
+      <div className="form-control flex">
+        <div className="input-group justify-end absolute top-20 -left-16">
           <input
             type="text"
             placeholder="Search…"
-            className="input input-bordered"
+            className="input input-bordered border-white text-white"
+            value={searchQuery}
+            onChange={handleSearchInputChange}
           />
-          <button className="btn btn-square">
+          <button
+            onClick={handleSearch}
+            className="btn btn-square border-white text-white"
+          >
             <svg
               xmlns="http://www.w3.org/2000/svg"
               className="h-6 w-6"
@@ -25,6 +57,14 @@ const FeaturedCollege = () => {
             </svg>
           </button>
         </div>
+      </div>
+      {/* ................... */}
+      <div ref={collegeCardRef} className="mt-20 space-y-6">
+        {" "}
+        {/* Assign the ref to the college card section */}
+        {filteredColleges.map((college) => (
+          <CollegeCard key={college.id} college={college} />
+        ))}
       </div>
     </div>
   );
