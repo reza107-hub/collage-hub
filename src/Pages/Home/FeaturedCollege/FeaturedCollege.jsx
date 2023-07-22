@@ -1,8 +1,11 @@
 import { useEffect, useState, useRef } from "react";
 import CollegeCard from "../../../Components/CollegeCard";
+import SectionTitle from "../../../Components/SectionTitle";
+import Aos from "aos";
+import useColleges from "../../../Components/useColleges";
 
 const FeaturedCollege = () => {
-  const [colleges, setColleges] = useState([]);
+  const [colleges] = useColleges();
   const [searchQuery, setSearchQuery] = useState("");
   const collegeCardRef = useRef(null); // Create a ref for the college card section
 
@@ -10,13 +13,11 @@ const FeaturedCollege = () => {
     // Scroll to the college card section when the search button is clicked
     collegeCardRef.current.scrollIntoView({ behavior: "smooth" });
   };
-
-  useEffect(() => {
-    fetch("https://college-hub-server.vercel.app/colleges")
-      .then((res) => res.json())
-      .then((data) => setColleges(data));
-  }, []);
-
+useEffect(() => {
+  Aos.init({
+    duration: 1000,
+  });
+}, []);
   const handleSearchInputChange = (event) => {
     setSearchQuery(event.target.value);
   };
@@ -27,6 +28,12 @@ const FeaturedCollege = () => {
 
   return (
     <div className="mt-32 container mx-auto">
+      <div data-aos="fade-up" data-aos-delay="300">
+        <SectionTitle
+          heading={"Featured Colleges"}
+          subheading={"Colleges that you will like most"}
+        />
+      </div>
       {/* search field */}
       <div className="form-control flex">
         <div className="input-group justify-end absolute top-20 -left-16">
