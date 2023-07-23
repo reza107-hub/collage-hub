@@ -1,6 +1,7 @@
 import Banner from "../Banner/Banner";
 import FeaturedCollege from "../FeaturedCollege/FeaturedCollege";
 import ImgGallery from "../ImgGallery/ImgGallery";
+import ResearchPaper from "../ResearchPaper/ResearchPaper";
 
 const Home = () => {
   return (
@@ -8,6 +9,7 @@ const Home = () => {
       <Banner />
       <FeaturedCollege />
       <ImgGallery />
+      <ResearchPaper />
     </>
   );
 };
