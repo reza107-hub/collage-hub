@@ -1,4 +1,4 @@
-import { useContext } from "react";
+import { useContext, useState } from "react";
 import { useForm } from "react-hook-form";
 import { FaFacebookF, FaGithub, FaGoogle } from "react-icons/fa";
 import { Link, useLocation, useNavigate } from "react-router-dom";
@@ -6,7 +6,9 @@ import { AuthContext } from "../../Provider/AuthProvider";
 import Swal from "sweetalert2";
 
 const Login = () => {
-  const { signIn } = useContext(AuthContext);
+  const [email, setEmail] = useState("");
+
+  const { signIn, passwordReset } = useContext(AuthContext);
   const navigate = useNavigate();
   const location = useLocation();
   const path = location?.state?.from || "/";
@@ -17,7 +19,6 @@ const Login = () => {
   } = useForm();
 
   const onSubmit = (data) => {
-    console.log(data);
     signIn(data.email, data.password)
       .then((result) => {
         console.log(result.user);
@@ -41,6 +42,29 @@ const Login = () => {
       );
   };
 
+  const handleResetPassword = (e) => {
+    e.preventDefault();
+    passwordReset(email)
+      .then(() => {
+        Swal.fire({
+          position: "center",
+          icon: "success",
+          title: `Password reset email sent!`,
+          showConfirmButton: false,
+          timer: 1500,
+        });
+      })
+      .catch((error) => {
+        Swal.fire({
+          position: "center",
+          icon: "error",
+          title: `${error?.message}`,
+          showConfirmButton: false,
+          timer: 1500,
+        });
+      });
+  };
+
   return (
     <div className="flex items-center justify-center h-screen bg-gray-200">
       <form
@@ -58,6 +82,7 @@ const Login = () => {
             type="email"
             className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
             {...register("email")}
+            onChange={(e) => setEmail(e.target.value)}
           />
           {errors.email && (
             <span className="text-red-500 text-xs italic">
@@ -90,12 +115,13 @@ const Login = () => {
           >
             Sign In
           </button>
-          <a
+          <button
+            onClick={handleResetPassword}
             className="mt-5 justify-start inline-block align-baseline font-bold text-sm text-blue-500 hover:text-blue-800"
             href="#"
           >
             Forgot Password?
-          </a>
+          </button>
         </div>
         <div className="mt-4">
           <div className="flex justify-center items-center">
