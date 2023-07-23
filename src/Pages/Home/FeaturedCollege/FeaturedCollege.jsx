@@ -13,11 +13,11 @@ const FeaturedCollege = () => {
     // Scroll to the college card section when the search button is clicked
     collegeCardRef.current.scrollIntoView({ behavior: "smooth" });
   };
-useEffect(() => {
-  Aos.init({
-    duration: 1000,
-  });
-}, []);
+  useEffect(() => {
+    Aos.init({
+      duration: 1000,
+    });
+  }, []);
   const handleSearchInputChange = (event) => {
     setSearchQuery(event.target.value);
   };
@@ -67,11 +67,11 @@ useEffect(() => {
       </div>
       {/* ................... */}
       <div ref={collegeCardRef} className="mt-20 space-y-6">
-        {" "}
-        {/* Assign the ref to the college card section */}
-        {filteredColleges.map((college) => (
-          <CollegeCard key={college._id} college={college} />
-        ))}
+        {filteredColleges
+          .slice(0, filteredColleges.length > 3 ? 3 : filteredColleges.length)
+          .map((college) => (
+            <CollegeCard key={college._id} college={college} />
+          ))}
       </div>
     </div>
   );

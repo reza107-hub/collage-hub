@@ -1,5 +1,6 @@
 import Banner from "../Banner/Banner";
 import FeaturedCollege from "../FeaturedCollege/FeaturedCollege";
+import Feedback from "../Feedback/Feedback";
 import ImgGallery from "../ImgGallery/ImgGallery";
 import ResearchPaper from "../ResearchPaper/ResearchPaper";
 
@@ -10,6 +11,7 @@ const Home = () => {
       <FeaturedCollege />
       <ImgGallery />
       <ResearchPaper />
+      <Feedback />
     </>
   );
 };

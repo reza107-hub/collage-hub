@@ -8,7 +8,9 @@ const Navbar = () => {
           to="/"
           aria-label="Home"
           title="Home"
-          className={({ isActive }) => (isActive ? "text-main" : "default")}
+          className={({ isActive }) =>
+            isActive ? "text-main" : "text-gray-500"
+          }
         >
           Home
         </NavLink>
@@ -18,7 +20,9 @@ const Navbar = () => {
           to="/colleges"
           aria-label="Colleges"
           title="Colleges"
-          className={({ isActive }) => (isActive ? "text-main" : "default")}
+          className={({ isActive }) =>
+            isActive ? "text-main" : "text-gray-500"
+          }
         >
           Colleges
         </NavLink>
@@ -28,7 +32,9 @@ const Navbar = () => {
           to="/admission"
           aria-label="Admission"
           title="Admission"
-          className={({ isActive }) => (isActive ? "text-main" : "default")}
+          className={({ isActive }) =>
+            isActive ? "text-main" : "text-gray-500"
+          }
         >
           Admission
         </NavLink>
@@ -38,7 +44,9 @@ const Navbar = () => {
           to="/my-college"
           aria-label="My College"
           title="My College"
-          className={({ isActive }) => (isActive ? "text-main" : "default")}
+          className={({ isActive }) =>
+            isActive ? "text-main" : "text-gray-500"
+          }
         >
           My College
         </NavLink>
