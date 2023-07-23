@@ -1,7 +1,15 @@
+import { useContext } from "react";
 import { useForm } from "react-hook-form";
 import { FaFacebookF, FaGithub, FaGoogle } from "react-icons/fa";
-import { Link } from "react-router-dom";
+import { Link, useLocation, useNavigate } from "react-router-dom";
+import { AuthContext } from "../../Provider/AuthProvider";
+import Swal from "sweetalert2";
+
 const Login = () => {
+  const { signIn } = useContext(AuthContext);
+  const navigate = useNavigate();
+  const location = useLocation();
+  const path = location?.state?.from || "/";
   const {
     register,
     handleSubmit,
@@ -10,6 +18,27 @@ const Login = () => {
 
   const onSubmit = (data) => {
     console.log(data);
+    signIn(data.email, data.password)
+      .then((result) => {
+        console.log(result.user);
+        Swal.fire({
+          position: "center",
+          icon: "success",
+          title: `Welcome Back ${result.user?.displayName}`,
+          showConfirmButton: false,
+          timer: 1500,
+        });
+        navigate(path);
+      })
+      .catch((error) =>
+        Swal.fire({
+          position: "center",
+          icon: "error",
+          title: `${error?.message}`,
+          showConfirmButton: false,
+          timer: 1500,
+        })
+      );
   };
 
   return (
@@ -89,7 +118,10 @@ const Login = () => {
           </div>
         </div>
         <p className="text-xs mt-5">
-          New Here? <Link className="text-red-600 link-hover" to={'/register'}>Please Register</Link>
+          New Here?{" "}
+          <Link className="text-red-600 link-hover" to={"/register"}>
+            Please Register
+          </Link>
         </p>
       </form>
     </div>

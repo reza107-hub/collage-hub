@@ -2,7 +2,10 @@ import { useForm } from "react-hook-form";
 import { FaFacebookF, FaGithub, FaGoogle } from "react-icons/fa";
 import { AuthContext } from "../../Provider/AuthProvider";
 import { useContext } from "react";
+import Swal from "sweetalert2";
+import { useNavigate } from "react-router-dom";
 const Register = () => {
+  const navigate = useNavigate();
   const { createUser, updateUserProfile } = useContext(AuthContext);
   const {
     register,
@@ -35,14 +38,38 @@ const Register = () => {
     console.log(data);
     createUser(data.email, data.password)
       .then((result) => {
-        updateUserProfile(data.name, data.photoURL).then(() => {
-          console.log(result.user).catch((error) => {
+        updateUserProfile(data.name, data.photoURL)
+          .then(() => {
+            console.log(result.user);
+            Swal.fire({
+              position: "center",
+              icon: "success",
+              title: `Successfully account created`,
+              showConfirmButton: false,
+              timer: 1500,
+            });
+            navigate("/");
+          })
+          .catch((error) => {
             console.log(error);
+            Swal.fire({
+              position: "center",
+              icon: "error",
+              title: `${error?.message}`,
+              showConfirmButton: false,
+              timer: 1500,
+            });
           });
-        });
       })
       .catch((error) => {
         console.log(error);
+        Swal.fire({
+          position: "center",
+          icon: "error",
+          title: `${error?.message}`,
+          showConfirmButton: false,
+          timer: 1500,
+        });
       });
   };
 

@@ -1,6 +1,10 @@
+import { useContext } from "react";
 import { Link, NavLink } from "react-router-dom";
+import { AuthContext } from "../../../Provider/AuthProvider";
 
 const Navbar = () => {
+  const { user } = useContext(AuthContext);
+
   const option = (
     <>
       <li>
@@ -88,12 +92,22 @@ const Navbar = () => {
         <ul className="menu menu-horizontal px-1 font-semibold">{option}</ul>
       </div>
       <div className="navbar-end">
-        <Link
-          className="btn bg-main text-white normal-case font-semibold hover:text-gray-500 hover:border-main"
-          to={"/login"}
-        >
-          Login
-        </Link>
+        {user ? (
+          <>
+            <Link to={'/user'} className="font-semibold hover:text-gray-500 link-hover">
+              {user?.displayName}
+            </Link>
+          </>
+        ) : (
+          <>
+            <Link
+              className="btn bg-main text-white normal-case font-semibold hover:text-gray-500 hover:border-main"
+              to={"/login"}
+            >
+              Login
+            </Link>
+          </>
+        )}
       </div>
     </div>
   );

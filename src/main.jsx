@@ -12,6 +12,8 @@ import AdmissionForm from "./Pages/Admission/AmissionForm";
 import Login from "./Pages/Login/Login";
 import AuthProvider from "./Provider/AuthProvider";
 import Register from "./Pages/Register/Register";
+import UserDetails from "./Pages/UserDetails/UserDetails";
+import PrivateRoute from "./Routes/PrivateRoutes";
 const queryClient = new QueryClient();
 
 const router = createBrowserRouter([
@@ -46,6 +48,14 @@ const router = createBrowserRouter([
       {
         path: "/register",
         element: <Register />,
+      },
+      {
+        path: "/user",
+        element: (
+          <PrivateRoute>
+            <UserDetails />
+          </PrivateRoute>
+        ),
       },
     ],
   },
