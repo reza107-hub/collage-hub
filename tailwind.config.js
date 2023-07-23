@@ -10,6 +10,7 @@ export default {
       'main': '#39CB8A',
       transparent: 'transparent',
       current: 'currentColor',
+      red: colors.red,
       black: colors.black,
       white: colors.white,
       gray: colors.gray,
