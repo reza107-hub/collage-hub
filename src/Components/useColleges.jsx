@@ -1,7 +1,7 @@
 import { useQuery } from "@tanstack/react-query";
 
 const useColleges = () => {
-    const { data: colleges = [] } = useQuery({
+    const { data: colleges = [], refetch } = useQuery({
       queryKey: ["colleges"],
       queryFn: async () => {
         const res = await fetch(
@@ -10,7 +10,7 @@ const useColleges = () => {
         return res.json();
       },
     });
-    return [colleges];
+    return [colleges, refetch];
 };
 
 export default useColleges;

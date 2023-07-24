@@ -3,9 +3,9 @@ import { FaFacebookF, FaGithub, FaGoogle } from "react-icons/fa";
 import { AuthContext } from "../../Provider/AuthProvider";
 import { useContext } from "react";
 import Swal from "sweetalert2";
-import { useNavigate } from "react-router-dom";
+import axios from "axios";
+
 const Register = () => {
-  const navigate = useNavigate();
   const { createUser, updateUserProfile } = useContext(AuthContext);
   const {
     register,
@@ -36,19 +36,29 @@ const Register = () => {
     const imgResponse = await handleImage(data.photo[0]);
     data.photoURL = imgResponse;
     console.log(data);
+    const user = {
+      name: data.name,
+      email: data.email,
+      image: data.photoURL,
+      address: data.address,
+    };
     createUser(data.email, data.password)
       .then((result) => {
         updateUserProfile(data.name, data.photoURL)
           .then(() => {
-            console.log(result.user);
-            Swal.fire({
-              position: "center",
-              icon: "success",
-              title: `Successfully account created`,
-              showConfirmButton: false,
-              timer: 1500,
+            axios.post("http://localhost:3000/users", user).then((res) => {
+              if (res.data.insertedId) {
+                Swal.fire({
+                  position: "center",
+                  icon: "success",
+                  title: `Successfully account created`,
+                  showConfirmButton: false,
+                  timer: 1500,
+                });
+              }
             });
-            navigate("/");
+            console.log(result.user);
+            window.location.href = "/";
           })
           .catch((error) => {
             console.log(error);
@@ -135,6 +145,26 @@ const Register = () => {
             </span>
           )}
         </div>
+
+        <div className="mb-4">
+          <label
+            className="block text-gray-700 text-sm font-bold mb-2"
+            htmlFor="address"
+          >
+            Address
+          </label>
+          <input
+            type="text"
+            className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+            {...register("address")}
+          />
+          {errors.address && (
+            <span className="text-red-500 text-xs italic">
+              photo is required
+            </span>
+          )}
+        </div>
+
         <div className="mb-6">
           <label
             className="block text-gray-700 text-sm font-bold mb-2"

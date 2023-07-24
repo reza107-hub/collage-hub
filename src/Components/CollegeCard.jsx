@@ -2,6 +2,8 @@ import { useEffect } from "react";
 import { Link } from "react-router-dom";
 import AOS from "aos";
 import "aos/dist/aos.css";
+import { Rating } from "@smastrom/react-rating";
+import "@smastrom/react-rating/style.css";
 
 const CollegeCard = ({ college }) => {
   useEffect(() => {
@@ -40,6 +42,18 @@ const CollegeCard = ({ college }) => {
               Research history: {college?.researchHistory}
             </h6>
             <h6 className="text-lg text-gray-600">Sports: {college?.sports}</h6>
+            {college?.review ? (
+              <h6 className="text-lg text-gray-600 flex gap-3">
+                Review:{" "}
+                <Rating
+                  style={{ maxWidth: 120 }}
+                  value={college?.review}
+                  readOnly
+                />
+              </h6>
+            ) : (
+              <></>
+            )}
           </div>
         </div>
       </div>
