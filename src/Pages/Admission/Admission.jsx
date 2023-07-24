@@ -11,7 +11,9 @@ const Admission = () => {
   const { data: admissionDetails = [] } = useQuery({
     queryKey: ["admissionDetails"],
     queryFn: async () => {
-      const res = await fetch("http://localhost:3000/admission");
+      const res = await fetch(
+        "https://college-hub-server.vercel.app/admission"
+      );
       return res.json();
     },
   });

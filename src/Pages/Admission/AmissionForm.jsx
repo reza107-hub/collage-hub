@@ -59,14 +59,16 @@ const AdmissionForm = () => {
     form.candidateName = user?.displayName;
     form.candidateEmail = user?.email;
     console.log(form);
-    axios.post("http://localhost:3000/admission", form).then((res) => {
-      if (res.data.insertedId) {
-        Swal.fire({
-          title: "Admission Done",
-          icon: "success",
-        });
-      }
-    });
+    axios
+      .post("https://college-hub-server.vercel.app/admission", form)
+      .then((res) => {
+        if (res.data.insertedId) {
+          Swal.fire({
+            title: "Admission Done",
+            icon: "success",
+          });
+        }
+      });
   };
 
   return (

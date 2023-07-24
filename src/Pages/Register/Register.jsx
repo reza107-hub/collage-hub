@@ -46,17 +46,19 @@ const Register = () => {
       .then((result) => {
         updateUserProfile(data.name, data.photoURL)
           .then(() => {
-            axios.post("http://localhost:3000/users", user).then((res) => {
-              if (res.data.insertedId) {
-                Swal.fire({
-                  position: "center",
-                  icon: "success",
-                  title: `Successfully account created`,
-                  showConfirmButton: false,
-                  timer: 1500,
-                });
-              }
-            });
+            axios
+              .post("https://college-hub-server.vercel.app/users", user)
+              .then((res) => {
+                if (res.data.insertedId) {
+                  Swal.fire({
+                    position: "center",
+                    icon: "success",
+                    title: `Successfully account created`,
+                    showConfirmButton: false,
+                    timer: 1500,
+                  });
+                }
+              });
             console.log(result.user);
             window.location.href = "/";
           })

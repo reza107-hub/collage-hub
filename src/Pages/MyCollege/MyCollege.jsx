@@ -15,7 +15,9 @@ const MyCollege = () => {
   const { data: admissionDetails = [] } = useQuery({
     queryKey: ["admissionDetails"],
     queryFn: async () => {
-      const res = await fetch("http://localhost:3000/admission");
+      const res = await fetch(
+        "https://college-hub-server.vercel.app/admission"
+      );
       return res.json();
     },
   });
@@ -23,7 +25,7 @@ const MyCollege = () => {
   const { data: users = [], refetch } = useQuery({
     queryKey: ["users"],
     queryFn: async () => {
-      const res = await fetch("http://localhost:3000/users");
+      const res = await fetch("https://college-hub-server.vercel.app/users");
       return res.json();
     },
   });
@@ -41,7 +43,7 @@ const MyCollege = () => {
   const handleReview = () => {
     axios
       .patch(
-        `http://localhost:3000/college/${userSpecificAdmissionDetails?.collegeId}?rating=${rating}&email=${currentUser?.email}`
+        `https://college-hub-server.vercel.app/college/${userSpecificAdmissionDetails?.collegeId}?rating=${rating}&email=${currentUser?.email}`
       )
       .then((res) => {
         if (res.data.modifiedCount) {
