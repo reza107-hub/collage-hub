@@ -60,7 +60,10 @@ const AdmissionForm = () => {
     form.candidateEmail = user?.email;
     console.log(form);
     axios
-      .post("https://college-hub-server.vercel.app/admission", form)
+      .post(
+        `http://localhost:3000/admission?email=${user?.email}&college=${form.collegeName}`,
+        form
+      )
       .then((res) => {
         if (res.data.insertedId) {
           Swal.fire({

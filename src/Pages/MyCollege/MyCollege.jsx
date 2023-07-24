@@ -46,7 +46,8 @@ const MyCollege = () => {
         `https://college-hub-server.vercel.app/college/${userSpecificAdmissionDetails?.collegeId}?rating=${rating}&email=${currentUser?.email}`
       )
       .then((res) => {
-        if (res.data.modifiedCount) {
+        console.log(res);
+        if (res.data.collegeResult.modifiedCount) {
           Swal.fire({
             title: "Review Done",
             icon: "success",

@@ -15,12 +15,15 @@ import Register from "./Pages/Register/Register";
 import UserDetails from "./Pages/UserDetails/UserDetails";
 import PrivateRoute from "./Routes/PrivateRoutes";
 import MyCollege from "./Pages/MyCollege/MyCollege";
+import ErrorPage from "./Pages/ErrorPage/ErrorPage";
+import { HelmetProvider } from "react-helmet-async";
 const queryClient = new QueryClient();
 
 const router = createBrowserRouter([
   {
     path: "/",
     element: <Main />,
+    errorElement: <ErrorPage />,
     children: [
       {
         path: "/",
@@ -81,9 +84,11 @@ const router = createBrowserRouter([
 ReactDOM.createRoot(document.getElementById("root")).render(
   <React.StrictMode>
     <QueryClientProvider client={queryClient}>
-      <AuthProvider>
-        <RouterProvider router={router} />
-      </AuthProvider>
+      <HelmetProvider>
+        <AuthProvider>
+          <RouterProvider router={router} />
+        </AuthProvider>
+      </HelmetProvider>
     </QueryClientProvider>
   </React.StrictMode>
 );

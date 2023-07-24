@@ -1,9 +1,9 @@
 import { useForm } from "react-hook-form";
-import { FaFacebookF, FaGithub, FaGoogle } from "react-icons/fa";
 import { AuthContext } from "../../Provider/AuthProvider";
 import { useContext } from "react";
 import Swal from "sweetalert2";
 import axios from "axios";
+import { Link } from "react-router-dom";
 
 const Register = () => {
   const { createUser, updateUserProfile } = useContext(AuthContext);
@@ -193,26 +193,12 @@ const Register = () => {
             Sign Up
           </button>
         </div>
-        <div className="mt-4">
-          <div className="flex justify-center items-center">
-            <div className="border-b w-1/5 lg:w-1/4"></div>
-            <span className="text-xs text-gray-500 uppercase px-2">
-              or connect with
-            </span>
-            <div className="border-b w-1/5 lg:w-1/4"></div>
-          </div>
-          <div className="flex mt-4 justify-center">
-            <button className="rounded-full py-2 px-4 mx-2">
-              <FaFacebookF />
-            </button>
-            <button className="rounded-full py-2 px-4 mx-2">
-              <FaGoogle />
-            </button>
-            <button className="rounded-full py-2 px-4 mx-2">
-              <FaGithub />
-            </button>
-          </div>
-        </div>
+        <p className="text-xs mt-5">
+          Already have an account?{" "}
+          <Link className="text-red-600 link-hover" to={"/login"}>
+            Login
+          </Link>
+        </p>
       </form>
     </div>
   );
