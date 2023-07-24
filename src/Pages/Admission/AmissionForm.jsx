@@ -61,7 +61,7 @@ const AdmissionForm = () => {
     console.log(form);
     axios
       .post(
-        `http://localhost:3000/admission?email=${user?.email}&college=${form.collegeName}`,
+        `https://college-hub-server.vercel.app/admission?email=${user?.email}&college=${form.collegeName}`,
         form
       )
       .then((res) => {

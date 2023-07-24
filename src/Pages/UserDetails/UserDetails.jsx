@@ -42,17 +42,19 @@ const UserDetails = () => {
     console.log(userData);
     updateUserProfile(name, user?.photoURL)
       .then(() => {
-        axios.patch("http://localhost:3000/users", userData).then((res) => {
-          console.log(res);
-          if (res.data.modifiedCount) {
-            Swal.fire({
-              title: "User data updated",
-              icon: "success",
-            });
-          }
-          refetch();
-          window.location.href = "/user";
-        });
+        axios
+          .patch("https://college-hub-server.vercel.app/users", userData)
+          .then((res) => {
+            console.log(res);
+            if (res.data.modifiedCount) {
+              Swal.fire({
+                title: "User data updated",
+                icon: "success",
+              });
+            }
+            refetch();
+            window.location.href = "/user";
+          });
       })
       .catch((error) => {
         // An error occurred
