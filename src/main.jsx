@@ -14,6 +14,7 @@ import AuthProvider from "./Provider/AuthProvider";
 import Register from "./Pages/Register/Register";
 import UserDetails from "./Pages/UserDetails/UserDetails";
 import PrivateRoute from "./Routes/PrivateRoutes";
+import MyCollege from "./Pages/MyCollege/MyCollege";
 const queryClient = new QueryClient();
 
 const router = createBrowserRouter([
@@ -43,7 +44,11 @@ const router = createBrowserRouter([
       },
       {
         path: "/admission/:id",
-        element: <AdmissionForm />,
+        element: (
+          <PrivateRoute>
+            <AdmissionForm />
+          </PrivateRoute>
+        ),
       },
       {
         path: "/login",
@@ -58,6 +63,14 @@ const router = createBrowserRouter([
         element: (
           <PrivateRoute>
             <UserDetails />
+          </PrivateRoute>
+        ),
+      },
+      {
+        path: "/my-college",
+        element: (
+          <PrivateRoute>
+            <MyCollege />
           </PrivateRoute>
         ),
       },

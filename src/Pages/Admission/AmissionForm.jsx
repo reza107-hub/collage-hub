@@ -1,9 +1,13 @@
-import { useState } from "react";
+import { useContext, useState } from "react";
 import { useParams } from "react-router-dom";
 import useColleges from "../../Components/useColleges";
+import { AuthContext } from "../../Provider/AuthProvider";
 const img_hosting_token = import.meta.env.VITE_imgbb;
+import axios from "axios";
+import Swal from "sweetalert2";
 
 const AdmissionForm = () => {
+  const { user } = useContext(AuthContext);
   const img_hosting_url = `https://api.imgbb.com/1/upload?key=${img_hosting_token}`;
   const { id } = useParams();
   const [colleges] = useColleges();
@@ -50,9 +54,19 @@ const AdmissionForm = () => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    form.collegeId = getCollege._id
+    form.collegeId = getCollege._id;
     form.collegeName = getCollege.collegeName;
+    form.candidateName = user?.displayName;
+    form.candidateEmail = user?.email;
     console.log(form);
+    axios.post("http://localhost:3000/admission", form).then((res) => {
+      if (res.data.insertedId) {
+        Swal.fire({
+          title: "Admission Done",
+          icon: "success",
+        });
+      }
+    });
   };
 
   return (
@@ -80,7 +94,6 @@ const AdmissionForm = () => {
             type="text"
             name="collegeName"
             value={getCollege?.collegeName}
-            onChange={handleChange}
             readOnly
           />
         </div>
@@ -93,8 +106,8 @@ const AdmissionForm = () => {
             className="py-2 px-3 rounded-lg border-2 border-purple-300 mt-1 focus:outline-none focus:ring-2 focus:ring-purple-600 focus:border-transparent"
             type="text"
             name="candidateName"
-            value={form.candidateName}
-            onChange={handleChange}
+            value={user?.displayName}
+            readOnly
           />
         </div>
 
@@ -119,8 +132,8 @@ const AdmissionForm = () => {
             className="py-2 px-3 rounded-lg border-2 border-purple-300 mt-1 focus:outline-none focus:ring-2 focus:ring-purple-600 focus:border-transparent"
             type="email"
             name="candidateEmail"
-            value={form.candidateEmail}
-            onChange={handleChange}
+            value={user?.email}
+            readOnly
           />
         </div>
 

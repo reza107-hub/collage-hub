@@ -79,10 +79,10 @@ const Login = () => {
             Email
           </label>
           <input
+            onChange={(e) => setEmail(e.target.value)}
             type="email"
             className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
             {...register("email")}
-            onChange={(e) => setEmail(e.target.value)}
           />
           {errors.email && (
             <span className="text-red-500 text-xs italic">
